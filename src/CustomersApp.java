@@ -44,7 +44,7 @@ public class CustomersApp {
 				pstmt = con.prepareStatement("Select custid, title, firstname, lastname, streetaddress, city, state, zipcode, emailaddress, position, company from customers a inner join stateid b on a.stateid = b.stateid inner join company c on a.companyid = c.companyid inner join posid d on d.posid =a.posid where fullname = ?");
 				pstmt2 = con.prepareStatement("Update customers set streetaddress = ?, city = ?, stateid = ?, zipcode = ? where fullname = ?");
 				pstmt3 = con.prepareStatement("Select stateid from stateid where state=?");
-				pstmt4 = con.prepareStatement("select * from (select count(distinct custid), count(distinct stateid), count(distinct companyid) from customers)") ;
+				pstmt4 = con.prepareStatement("select (select count(distinct custid) from customers), (select count(distinct stateid)  from stateid),(select count(distinct companyid) from customers) from dual") ;
 			} 
 			catch (SQLException e2) 
 			{
